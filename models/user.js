@@ -25,6 +25,11 @@ const userSchema = Schema({
         trim: true,
         unique: true,
         index: true
+    },
+    verified: {
+        type: Boolean,
+        required: true,
+        default: true
     }
 })
 
