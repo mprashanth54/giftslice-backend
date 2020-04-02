@@ -35,7 +35,7 @@ const userSchema = Schema({
 
 userSchema.path('email').validate(function (email) {
     var emailRegex = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-    return emailRegex.test(email); // Assuming email has a text attribute
+    return emailRegex.test(email);
 }, 'Enter Valid Email')
 
 
