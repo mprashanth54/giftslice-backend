@@ -1,6 +1,7 @@
 const mongoose = require('../db')
 const Schema = mongoose.Schema;
 const User = require('./user')
+const Campaign = require('./campaign')
 
 const giftSchema = Schema({
     campaign: {
@@ -23,6 +24,11 @@ const giftSchema = Schema({
         required: [true, 'Description is missing'],
         trim: true
     },
+    tags: {
+        type: [String],
+        required: [true, 'Tags is missing'],
+        trim: true
+    },
     images: {
         type: [String],
         required: [true, 'Image is missing'],
@@ -35,19 +41,21 @@ const giftSchema = Schema({
     },
     link: {
         type: String,
-        trim: true
+        trim: true,
+        default: null
     }
 })
 
 giftSchema.pre('save', async (next, data) => {
     try {
-        const { user } = data
+        const { user, campaign } = data
         const user_count = await User.count({ _id: Schema.Types.ObjectId(user) })
-        if (user_count != 1) {
-            return next(new Error('User not found'))
+        const campaign_count = await Campaign.count({ _id: Schema.Types.ObjectId(campaign) })
+        if (user_count != 1 || campaign_count != 1) {
+            return next(new Error('Invalid Request'))
         }
     } catch (err) {
-        return next(new Error({ error: err.message }))
+        return next(err)
     }
 })
 
