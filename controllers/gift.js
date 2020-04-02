@@ -22,5 +22,15 @@ gift.post('/', async (req, res) => {
     }
 })
 
+gift.post('/global', async (req, res) => {
+    try {
+        console.log(req.body)
+        await GiftService.create(null, req.body)
+        res.json({ message: "Successfully Created" })
+    } catch (err) {
+        res.status(400).json({ error: err })
+    }
+})
 
-module.exports = campaign
+
+module.exports = gift

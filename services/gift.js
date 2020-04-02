@@ -2,7 +2,9 @@ const Gift = require('../models/gift')
 
 exports.create = async (user, data) => {
     try {
-        const gift = new Gift({ user: user, data })
+        data.user = user
+        const gift = new Gift(data)
+        console.log(gift)
         await gift.save()
     } catch (err) {
         throw err
