@@ -60,6 +60,7 @@ exports.verifyToken = async (token) => {
         const { email } = tokenData.data
         return await User.findOne({ email: email }, { password: 0 })
     } catch (err) {
+        console.log(err)
         throw `Invalid Token`
     }
 

@@ -25,4 +25,5 @@ const verifyUser = async (req, res, next) => {
 
 app.use('/campaigns', verifyUser, require('./controllers/campaign'))
 app.use('/auth', require('./controllers/auth'))
+app.use('/gifts', verifyUser, require('./controllers/gift'))
 module.exports = app
