@@ -11,6 +11,14 @@ exports.create = async (user, data) => {
     }
 }
 
+exports.getGlobal = async () => {
+    try {
+        return await Gift.find({ campaign: null, user: null })
+    } catch (err) {
+        throw `Unable to fetch gifts`
+    }
+}
+
 exports.getById = async (id) => {
     try {
         return Gift.findById(id)
