@@ -30,4 +30,5 @@ app.use('/campaigns', verifyUser, require('./controllers/campaign'))
 app.use('/auth', require('./controllers/auth'))
 app.use('/gifts', verifyUser, require('./controllers/gift'))
 app.use('/uploads', verifyUser, require('./controllers/upload'))
+app.use('/users', verifyUser, require('./controllers/user'))
 module.exports = app

@@ -30,6 +30,10 @@ const userSchema = Schema({
         type: Boolean,
         required: true,
         default: true
+    },
+    image: {
+        type: String,
+        default: null
     }
 })
 

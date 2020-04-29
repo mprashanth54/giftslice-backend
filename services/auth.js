@@ -41,7 +41,6 @@ exports.verifyPass = async (pass, hashPass) => {
 
 exports.logIn = async (email, pass) => {
     const hashPassword = await this.getHashPassword(pass)
-    console.log(hashPassword)
     const user = await User.findOne({ email: email })
     if (user) {
         // console.log(user)
