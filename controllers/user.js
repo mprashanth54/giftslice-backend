@@ -6,4 +6,10 @@ user.get('/me', async (req, res) => {
     res.json(user)
 })
 
+user.put('/me/image', async (req, res) => {
+    const { image } = req.body
+    const user = await userService.updateImage(req.user.email, image)
+    res.json({ message: "Success" })
+})
+
 module.exports = user
