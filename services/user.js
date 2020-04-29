@@ -1,7 +1,11 @@
 const User = require('../models/user')
+const DbxService = require('../services/dropbox')
+
 
 exports.getUser = async (email) => {
-    return await User.findOne({ email: email }, { password: 0 })
+    const user = await User.findOne({ email: email }, { password: 0 })
+    user.image = user.image ? await DbxService.getTempLink(user.image) : null
+    return user
 }
 
 
