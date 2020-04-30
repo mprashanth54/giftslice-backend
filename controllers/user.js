@@ -1,6 +1,12 @@
 const user = require('express').Router()
 const userService = require('../services/user')
 
+user.get('/', async (req, res) => {
+    const { email } = req.user
+    const users = await userService.getAll(email)
+    res.json({ users: users })
+})
+
 user.get('/me', async (req, res) => {
     try {
         const user = await userService.getUser(req.user.email)
@@ -11,6 +17,7 @@ user.get('/me', async (req, res) => {
     }
 
 })
+
 
 user.post('/change-password', async (req, res) => {
     try {
