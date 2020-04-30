@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.use(fileUpload({
-    limits: { fileSize: 50 * 1024 * 1024 },
+    limits: { fileSize: 100 * 1024 * 1024 },
 }));
 
 const verifyUser = async (req, res, next) => {
