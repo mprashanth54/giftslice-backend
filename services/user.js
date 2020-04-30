@@ -35,5 +35,12 @@ exports.updatePassword = async (email, oldPassword, newPassword) => {
 }
 
 exports.getAll = async (email) => {
-    return await User.find({ email: { $ne: email } }, { password: 0 })
+    const users = await User.find({ email: { $ne: email } }, { password: 0 })
+    const images = await Promise.all(users.map((user) => {
+        return user.image ? DbxService.getTempLink(user.image) : null
+    }))
+    return users.map((user, i) => {
+        user.image = images[i]
+        return user
+    })
 }

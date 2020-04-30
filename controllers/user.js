@@ -4,6 +4,7 @@ const userService = require('../services/user')
 user.get('/', async (req, res) => {
     const { email } = req.user
     const users = await userService.getAll(email)
+    console.log("here")
     res.json({ users: users })
 })
 
