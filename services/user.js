@@ -32,5 +32,8 @@ exports.updatePassword = async (email, oldPassword, newPassword) => {
         console.log(err)
         throw `Unauthorized`
     }
+}
 
+exports.getAll = async (email) => {
+    return await User.find({ email: { $ne: email } }, { password: 0 })
 }
