@@ -12,6 +12,19 @@ user.get('/me', async (req, res) => {
 
 })
 
+user.post('/change-password', async (req, res) => {
+    try {
+        const { email } = req.user
+        const { oldPassword, newPassword } = req.body
+        await userService.updatePassword(email, oldPassword, newPassword)
+        res.json({ message: "Success" })
+    } catch (err) {
+        res.status(400).json({ message: "Bad Request" })
+    }
+
+
+})
+
 user.put('/me/image', async (req, res) => {
     const { image } = req.body
     const user = await userService.updateImage(req.user.email, image)
