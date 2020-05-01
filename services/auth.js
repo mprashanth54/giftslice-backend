@@ -55,6 +55,7 @@ exports.logIn = async (email, pass) => {
 
 exports.verifyToken = async (token) => {
     try {
+        console.log('verify')
         const tokenData = await jwt.verify(token, 'Top-Secret-Sample-Key-Will-Be-Read-By-Hidden-File')
         const { email } = tokenData.data
         return await User.findOne({ email: email }, { password: 0 })
