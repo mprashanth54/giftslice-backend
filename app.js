@@ -17,9 +17,11 @@ app.use(fileUpload({
 
 const verifyUser = async (req, res, next) => {
     try {
+        console.log("step 1")
         const { token } = req.headers
         const user = await AuthService.verifyToken(token)
         req.user = user
+        console.log(user)
         next()
     } catch (err) {
         res.status(401).json({ message: "Unauthorized token" })

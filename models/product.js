@@ -4,41 +4,16 @@ const Schema = mongoose.Schema;
 const User = require('./user')
 const Campaign = require('./campaign')
 
-const giftSchema = Schema({
+const productSchema = Schema({
     campaign: {
         type: Mongoose.Types.ObjectId,
-        default: null,
-        ref: 'Campaigns'
-    },
-    ref: {
-        type: Mongoose.Types.ObjectId,
-        default: null,
-        ref: 'Campaigns'
-    },
-    user: {
-        type: Mongoose.Types.ObjectId,
-        default: null,
-        ref: 'Users'
-    },
-    name: {
-        type: String,
         required: true,
-        trim: true
+        ref: 'Campaigns'
     },
-    description: {
-        type: String,
-        required: [true, 'Description is missing'],
-        trim: true
-    },
-    tags: {
-        type: [String],
-        required: [true, 'Tags is missing'],
-        trim: true
-    },
-    images: {
-        type: [String],
-        required: [true, 'Image is missing'],
-        trim: true
+    refGift: {
+        type: Mongoose.Types.ObjectId,
+        required: true,
+        ref: 'Gifts'
     },
     price: {
         type: Number,
@@ -47,14 +22,7 @@ const giftSchema = Schema({
     },
     collected: {
         type: Number,
-        required: [true, 'Collected is missing'],
-        default: 0,
-        min: [0, 'Minimum is 1 dollar']
-    },
-    link: {
-        type: String,
-        trim: true,
-        default: null
+        default: 0
     }
 })
 
@@ -80,8 +48,8 @@ giftSchema.pre('save', async (next, data) => {
     }
 })
 
-const gift = mongoose.model('Gifts', giftSchema)
+const product = mongoose.model('Product', productSchema)
 
 
 
-module.exports = gift
+module.exports = product
